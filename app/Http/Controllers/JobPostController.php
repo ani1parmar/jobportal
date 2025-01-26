@@ -60,4 +60,15 @@ class JobPostController extends Controller
 
         return response()->noContent(200);
     }
+
+    public function apply(JobPost $jobPost)
+    {
+        if ($jobPost->users()->where('user_id', Auth::id())->exists()) {
+            abort(403, "You already applied this job post.");
+        }
+
+        $jobPost->users()->attach(Auth::id());
+
+        return response()->noContent(200);
+    }
 }

@@ -20,6 +20,8 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -36,10 +38,13 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->required()
                     ->maxLength(255)
+                    ->password()
                     ->columnSpan('full'),
                 Forms\Components\TextInput::make('password_confirmation')
                     ->required()
                     ->maxLength(255)
+                    ->password()
+                    ->same('password')
                     ->columnSpan('full'),
             ]);
     }
@@ -53,6 +58,10 @@ class UserResource extends Resource
                 TextColumn::make('job_posts_count')
                     ->label('Job Posts')
                     ->counts('jobPosts')
+                    ->sortable(),
+                TextColumn::make('job_applications_count')
+                    ->label('Job Applications')
+                    ->counts('jobApplications')
                     ->sortable(),
             ])
             ->filters([

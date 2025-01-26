@@ -16,4 +16,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::apiResource('job-posts', JobPostController::class);
+
+    Route::post('job-posts/{job_post}/apply', [JobPostController::class, 'apply']);
 });
