@@ -1,0 +1,318 @@
+{
+	"info": {
+		"_postman_id": "aa53ffaf-0216-47dc-8cb7-18ccc31dc1e0",
+		"name": "JobPortal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "16233273"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{API_URL}}/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{API_URL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{API_URL}}/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JobPosts",
+			"item": [
+				{
+					"name": "Get All Job Posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    //\"user_id\" : 1, for specific user\n    \"search\": \"new\" // search in title, description, company, location\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{API_URL}}/job-posts"
+					},
+					"response": []
+				},
+				{
+					"name": "View JobPost",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/job-posts/:job-post",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"job-posts",
+								":job-post"
+							],
+							"variable": [
+								{
+									"key": "job-post",
+									"value": "1",
+									"description": "job post id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store JobPost",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"Job Title\",\n    \"description\" : \"Job Description\",\n    \"company\" : \"Company Name\",\n    \"location\" : \"location\",\n    \"salary\" : \"100000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{API_URL}}/job-posts"
+					},
+					"response": []
+				},
+				{
+					"name": "Update JobPost",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"New Job Title\",\n    \"description\" : \"New Job Description\",\n    \"company\" : \"New Company Name\",\n    \"location\" : \"New location\",\n    \"salary\" : \"200000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/job-posts/:job-post",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"job-posts",
+								":job-post"
+							],
+							"variable": [
+								{
+									"key": "job-post",
+									"value": "4",
+									"description": "job post id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Job Post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/job-posts/:job-post",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"job-posts",
+								":job-post"
+							],
+							"variable": [
+								{
+									"key": "job-post",
+									"value": "4",
+									"description": "job post id"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Apply For Job",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{API_URL}}/job-posts/:job-post/apply",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"job-posts",
+						":job-post",
+						"apply"
+					],
+					"variable": [
+						{
+							"key": "job-post",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "1|gg2H9B1M9259Hhwp0Kl9Fo4lIRnKYxB0l1m1wEt80b79a6b0"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_URL",
+			"value": "http://jobportal.test/api/v1",
+			"type": "string"
+		}
+	]
+}
